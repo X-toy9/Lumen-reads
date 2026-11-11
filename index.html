@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lumen Reads — discover books, save favorites, and build your reading library.">
+  <title>Lumen Reads | Discover your next book</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="brand">
+        <span class="brand-mark">L</span>
+        Lumen<span>Reads</span>
+      </a>
+
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="main-nav">
+        Menu
+      </button>
+
+      <nav id="main-nav" class="main-nav">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#explore" data-nav="explore">Explore</a>
+        <a href="#library" data-nav="library">My Library</a>
+        <a href="#about" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+
+        <div class="nav-actions">
+          <a href="#login" data-nav="login" class="guest-only nav-link">Log in</a>
+          <a href="#signup" data-nav="signup" class="guest-only button button-small">Get started</a>
+
+          <button id="logout-button" class="text-button user-only" hidden>Log out</button>
+
+          <button id="cart-button" class="icon-button" aria-label="Open cart">
+            Cart
+            <span id="cart-count" class="badge">0</span>
+          </button>
+
+          <button id="theme-button" class="icon-button" aria-label="Toggle color theme">
+            Theme
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- HOME -->
+    <section id="home" class="page">
+      <div class="container hero">
+        <div class="hero-copy">
+          <span class="pill">Live book discovery</span>
+
+          <h1>Find the book<br>that changes<br>your perspective.</h1>
+
+          <p>
+            Lumen Reads brings real books, thoughtful details, and a personal
+            reading library into one calm, modern space.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#explore" class="button">Start exploring</a>
+            <a href="#signup" class="button ghost">Create free account</a>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <strong id="stat-books">—</strong>
+              <span>Books loaded</span>
+            </div>
+
+            <div>
+              <strong>4</strong>
+              <span>Categories</span>
+            </div>
+
+            <div>
+              <strong>100%</strong>
+              <span>Browser demo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-glow"></div>
+          <div id="hero-covers" class="hero-covers"></div>
+        </div>
+      </div>
+
+      <section class="container section">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Browse by interest</span>
+            <h2>Choose your direction</h2>
+          </div>
+
+          <a href="#explore" class="arrow-link">See all books</a>
+        </div>
+
+        <div class="category-row">
+          <button class="category-tile" data-category="Fiction">
+            <span>Fiction</span>
+            <small>Stories and imagination</small>
+          </button>
+
+          <button class="category-tile" data-category="Technology">
+            <span>Technology</span>
+            <small>Code, design, and ideas</small>
+          </button>
+
+          <button class="category-tile" data-category="Self-development">
+            <span>Self-development</span>
+            <small>Growth and reflection</small>
+          </button>
+
+          <button class="category-tile" data-category="Business">
+            <span>Business</span>
+            <small>Work and possibility</small>
+          </button>
+        </div>
+      </section>
+
+      <section class="container section">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Popular now</span>
+            <h2>Trending reads</h2>
+          </div>
+
+          <a href="#explore" class="arrow-link">Browse collection</a>
+        </div>
+
+        <div id="trending-books" class="book-grid"></div>
+      </section>
+
+      <section class="container section">
+        <div class="feature-panel">
+          <div class="feature-copy">
+            <span class="eyebrow">Editor’s spotlight</span>
+            <h2 id="spotlight-title">Loading spotlight…</h2>
+            <p id="spotlight-text">We are preparing a book worth your attention.</p>
+
+            <div id="spotlight-meta" class="meta-row"></div>
+
+            <button id="spotlight-button" class="button">Preview book</button>
+          </div>
+
+          <div id="spotlight-cover" class="feature-cover"></div>
+        </div>
+      </section>
+
+      <section class="container section">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Fresh perspectives</span>
+            <h2>More to discover</h2>
+          </div>
+        </div>
+
+        <div id="discover-books" class="book-grid"></div>
+      </section>
+
+      <section class="container section">
+        <div class="newsletter">
+          <div>
+            <span class="eyebrow">Reading notes</span>
+            <h2>Leave room for your next great read.</h2>
+            <p>Get occasional ideas for thoughtful books and new perspectives.</p>
+          </div>
+
+          <form id="newsletter-form">
+            <input id="newsletter-email" type="email" placeholder="Enter your email" required>
+            <button class="button" type="submit">Join demo list</button>
+          </form>
+
+          <p id="newsletter-status" class="small-note"></p>
+        </div>
+      </section>
+    </section>
+
+    <!-- EXPLORE -->
+    <section id="explore" class="page" hidden>
+      <div class="container section">
+        <div class="page-head">
+          <span class="eyebrow">The collection</span>
+          <h1>Explore books</h1>
+          <p>Search the catalog, filter by interest, and open a book for more detail.</p>
+        </div>
+
+        <div class="toolbar">
+          <div class="search-box">
+            <input id="search-input" type="search" placeholder="Search title or author…">
+          </div>
+
+          <select id="category-filter" aria-label="Filter by category">
+            <option value="all">All categories</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Technology">Technology</option>
+            <option value="Self-development">Self-development</option>
+            <option value="Business">Business</option>
+          </select>
+
+          <select id="sort-select" aria-label="Sort books">
+            <option value="featured">Featured</option>
+            <option value="title">Title A–Z</option>
+            <option value="year-new">Newest first</option>
+            <option value="year-old">Oldest first</option>
+          </select>
+
+          <div class="view-toggle">
+            <button data-view="grid" class="active" aria-pressed="true">Grid</button>
+            <button data-view="list" aria-pressed="false">List</button>
+          </div>
+        </div>
+
+        <div class="filter-row">
+          <label class="checkbox-label">
+            <input id="wishlist-filter" type="checkbox">
+            Show wishlist only
+          </label>
+
+          <p id="result-count" class="small-note"></p>
+        </div>
+
+        <div id="book-results" class="book-grid"></div>
+      </div>
+    </section>
+
+    <!-- LIBRARY -->
+    <section id="library" class="page" hidden>
+      <div class="container section">
+        <div class="page-head">
+          <span class="eyebrow">Your reading space</span>
+          <h1>My library</h1>
+        </div>
+
+        <div id="library-content"></div>
+      </div>
+    </section>
+
+    <!-- LOGIN -->
+    <section id="login" class="page" hidden>
+      <div class="container auth-wrap">
+        <div class="auth-copy">
+          <span class="eyebrow">Welcome back</span>
+          <h1>Your next read is waiting.</h1>
+          <p>Log in to view your wishlist, cart, and saved library.</p>
+        </div>
+
+        <form id="login-form" class="auth-card">
+          <h2>Log in</h2>
+
+          <label for="login-email">Email</label>
+          <input id="login-email" type="email" required>
+
+          <label for="login-password">Password</label>
+          <input id="login-password" type="password" required>
+
+          <p id="login-error" class="error-text"></p>
+
+          <button class="button full" type="submit">Log in</button>
+
+          <p class="auth-switch">
+            New here? <a href="#signup">Create an account</a>
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- SIGNUP -->
+    <section id="signup" class="page" hidden>
+      <div class="container auth-wrap">
+        <div class="auth-copy">
+          <span class="eyebrow">Start reading</span>
+          <h1>Build a bookshelf<br>that feels like you.</h1>
+          <p>Create a demo account to save books and build your personal library.</p>
+        </div>
+
+        <form id="signup-form" class="auth-card">
+          <h2>Create account</h2>
+
+          <label for="signup-name">Full name</label>
+          <input id="signup-name" type="text" required>
+
+          <label for="signup-email">Email</label>
+          <input id="signup-email" type="email" required>
+
+          <label for="signup-password">Password</label>
+          <input id="signup-password" type="password" minlength="8" required>
+
+          <label for="signup-confirm">Confirm password</label>
+          <input id="signup-confirm" type="password" minlength="8" required>
+
+          <p id="signup-error" class="error-text"></p>
+
+          <button class="button full" type="submit">Create account</button>
+
+          <p class="auth-switch">
+            Already have an account? <a href="#login">Log in</a>
+          </p>
+
+          <p class="small-note">
+            Demo only: use a made-up email and password. Data stays in this browser.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="page" hidden>
+      <div class="container narrow section">
+        <span class="eyebrow">Our story</span>
+        <h1>Books that open new doors.</h1>
+
+        <p class="lead">
+          Lumen Reads is a modern book-discovery experience designed to help
+          readers find meaningful stories, useful ideas, and fresh perspectives.
+        </p>
+
+        <div class="about-grid">
+          <article class="info-card">
+            <h3>Discover</h3>
+            <p>Browse a live catalog of books across fiction, technology, personal growth, and business.</p>
+          </article>
+
+          <article class="info-card">
+            <h3>Preview</h3>
+            <p>Open a book to view its cover, description, publication information, and subjects.</p>
+          </article>
+
+          <article class="info-card">
+            <h3>Save</h3>
+            <p>Add books to your wishlist or cart, then save selections to your personal demo library.</p>
+          </article>
+        </div>
+
+        <div class="info-card wide">
+          <h3>Important note</h3>
+          <p>
+            Book information and cover images come from Open Library.
+            This is a front-end demonstration website: it does not process payments,
+            deliver e-book files, or provide reading access.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="page" hidden>
+      <div class="container section">
+        <div class="page-head">
+          <span class="eyebrow">Say hello</span>
+          <h1>Let’s talk books.</h1>
+          <p>Questions, feedback, or a book recommendation? Send a demo message.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="info-card">
+            <h3>Before you write</h3>
+            <p>This contact form validates your message but does not send email or store your details.</p>
+
+            <div class="contact-detail">
+              <span>Email</span>
+              <strong>hello@lumenreads.demo</strong>
+            </div>
+
+            <div class="contact-detail">
+              <span>Response time</span>
+              <strong>Within 2 business days</strong>
+            </div>
+          </div>
+
+          <form id="contact-form" class="auth-card">
+            <label for="contact-name">Your name</label>
+            <input id="contact-name" type="text" required>
+
+            <label for="contact-email">Email</label>
+            <input id="contact-email" type="email" required>
+
+            <label for="contact-subject">Subject</label>
+            <input id="contact-subject" type="text" required>
+
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" rows="6" minlength="10" required></textarea>
+
+            <button class="button full" type="submit">Send demo message</button>
+            <p id="contact-status" class="small-note"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <a href="#home" class="brand">Lumen<span>Reads</span></a>
+        <p>A calmer way to discover your next book.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#explore">Explore</a>
+        <a href="#library">Library</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <p>&copy; <span id="year"></span> Lumen Reads. Demo project.</p>
+    </div>
+  </footer>
+
+  <!-- BOOK MODAL -->
+  <dialog id="book-modal" class="modal">
+    <div class="modal-top">
+      <span class="eyebrow">Book preview</span>
+
+      <button class="modal-close" data-close="book-modal" aria-label="Close book preview">
+        &times;
+      </button>
+    </div>
+
+    <div id="book-modal-body" class="modal-body"></div>
+
+    <div class="modal-bottom">
+      <p class="small-note">
+        Catalog information from Open Library. Prices are demonstration values.
+        No payment or e-book download is included.
+      </p>
+    </div>
+  </dialog>
+
+  <!-- CART MODAL -->
+  <dialog id="cart-modal" class="modal">
+    <div class="modal-top">
+      <span class="eyebrow">Your cart</span>
+
+      <button class="modal-close" data-close="cart-modal" aria-label="Close cart">
+        &times;
+      </button>
+    </div>
+
+    <div id="cart-body" class="modal-body"></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
